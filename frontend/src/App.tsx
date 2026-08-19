@@ -10,7 +10,7 @@ const tickets = [
   ["#SQ-1045","Usman Raza","API access configuration","High","Open","1 hr"],
 ];
 const nav = ["Overview","AI Assistant","Tickets","Customers","Knowledge","Analytics"];
-const API_URL=(import.meta.env.VITE_API_URL||"http://127.0.0.1:8000").replace(/\/$/,"");
+const API_URL=(import.meta.env.VITE_API_URL||(import.meta.env.PROD?"":"http://127.0.0.1:8000")).replace(/\/$/,"");
 
 export default function Home(){
  const [token,setToken]=useState(()=>localStorage.getItem("supportiq_token")||"");

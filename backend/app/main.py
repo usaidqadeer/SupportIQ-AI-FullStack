@@ -10,8 +10,10 @@ from sqlalchemy import DateTime, ForeignKey, String, Text, create_engine, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, sessionmaker
 
 DATABASE_URL=os.getenv("DATABASE_URL","sqlite:///./supportiq.db")
+if DATABASE_URL.startswith("postgresql://"):
+ DATABASE_URL=DATABASE_URL.replace("postgresql://","postgresql+psycopg://",1)
 SECRET_KEY=os.getenv("SECRET_KEY","change-this-development-secret")
-engine=create_engine(DATABASE_URL,connect_args={"check_same_thread":False} if DATABASE_URL.startswith("sqlite") else {})
+engine=create_engine(DATABASE_URL,connect_args={"check_same_thread":False} if DATABASE_URL.startswith("sqlite") else {},pool_pre_ping=True)
 SessionLocal=sessionmaker(bind=engine,autoflush=False,autocommit=False)
 class Base(DeclarativeBase):pass
 class User(Base):

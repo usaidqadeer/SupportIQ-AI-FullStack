@@ -1,0 +1,7 @@
+{
+  "name": "supportiq-ai-fullstack",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix frontend install && npm --prefix frontend run build"
+  }
+}
