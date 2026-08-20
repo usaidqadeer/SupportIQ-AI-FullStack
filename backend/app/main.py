@@ -50,7 +50,7 @@ def ai_answer(message):
  elif "ticket" in text:answer="Create a ticket from the Tickets page and add a subject, description, and priority."
  else:answer="I found relevant guidance in the knowledge base. Check workspace settings first; if the issue continues, I can hand this conversation to an agent."
  return answer,"negative" if negative else "neutral"
-app=FastAPI(title="SupportIQ AI API",version="1.0.0",description="Production-style AI customer support backend")
+app=FastAPI(title="SupportIQ AI API",version="1.0.0",description="Production-style AI customer support backend",docs_url="/api/docs",openapi_url="/api/openapi.json")
 app.add_middleware(CORSMiddleware,allow_origins=os.getenv("FRONTEND_URL","http://localhost:5173,http://127.0.0.1:5173").split(","),allow_credentials=True,allow_methods=["*"],allow_headers=["*"])
 @app.get("/")
 def health():return {"name":"SupportIQ AI API","status":"healthy","docs":"/docs"}
